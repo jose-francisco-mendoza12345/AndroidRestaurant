@@ -142,12 +142,21 @@
 
 
             <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="208dp"
-                android:layout_height="160dp"
+                android:id="@+id/FotoLogo"
+                android:layout_width="350dp"
+                android:layout_height="200dp"
                 android:layout_gravity="center"
-                android:background="#03A9F4"
-                app:srcCompat="?attr/selectableItemBackgroundBorderless" />
+                android:background="#FFFFFF"
+                app:srcCompat="@mipmap/logo2" />
+
+            <Button
+                android:id="@+id/button12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="SubirLogo"
+                android:text="@string/botonFoto"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -164,18 +173,22 @@
                 tools:layout_editor_absoluteX="121dp" />
 
             <ImageView
-                android:id="@+id/imageFoto"
-                android:layout_width="329dp"
-                android:layout_height="222dp"
+                android:id="@+id/FotoRestaurante"
+                android:layout_width="350dp"
+                android:layout_height="200dp"
                 android:layout_gravity="center"
-                android:background="#03A9F4"
-                app:srcCompat="?attr/selectableItemBackgroundBorderless" />
+                android:background="#FFFFFF"
+                app:srcCompat="@mipmap/logo2" />
 
-            <TextView
-                android:id="@+id/textView2"
+
+            <Button
+                android:id="@+id/button13"
                 android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:text="TextView" />
+                android:layout_height="wrap_content"
+                android:onClick="SubirRestaurante"
+                android:text="@string/botonFoto"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/button"

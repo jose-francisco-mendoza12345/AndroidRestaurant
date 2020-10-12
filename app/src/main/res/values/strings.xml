@@ -21,6 +21,7 @@
     <string name="txt_fecha">Fecha:</string>
     <string name="txt_Logo">Logo</string>
     <string name="txt_FotoRes">Foto de Restaurante</string>
+    <string name="botonFoto">Agregar o Subir Foto</string>
     <string name="boton3">Guardar Datos</string>
 
     <!-- Tercera Actividad -->
