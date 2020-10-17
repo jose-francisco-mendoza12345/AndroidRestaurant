@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="409dp"
+        android:layout_height="51dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="HACER PEDIDOS " />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/Lista_Pedidos"
+        android:layout_width="162dp"
+        android:layout_height="278dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="76dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/button15"
+        android:layout_width="117dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.276"
+        app:layout_constraintStart_toEndOf="@+id/Lista_Pedidos"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        tools:text="INSERTAR" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="61dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="76dp"
+        app:layout_constraintStart_toEndOf="@+id/button15"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="143dp"
+        android:layout_height="279dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton3"
+        app:layout_constraintHorizontal_bias="0.437"
+        app:layout_constraintStart_toEndOf="@+id/Lista_Pedidos"
+        app:layout_constraintTop_toBottomOf="@+id/button15" />
+</androidx.constraintlayout.widget.ConstraintLayout>

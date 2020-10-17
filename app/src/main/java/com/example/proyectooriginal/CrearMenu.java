@@ -2,6 +2,7 @@ package com.example.proyectooriginal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -72,4 +73,15 @@ public class CrearMenu extends AppCompatActivity {
         nombre.setText("");
         precio.setText("");
     }
+    public  void Guargar(View view)
+    {
+        Intent otraActividad2=new Intent(this, CrearPedidos.class);
+         if(!nombre.getText().toString().isEmpty() && !precio.getText().toString().isEmpty())
+        {
+            Toast.makeText(this, "Los Datos han sido registrados", Toast.LENGTH_SHORT).show();
+            startActivity(otraActividad2);
+        }
+    }
+
+
 }
