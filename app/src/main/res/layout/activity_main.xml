@@ -144,12 +144,6 @@
                 android:visibility="invisible" />
 
             <Button
-                android:id="@+id/borrar_despues"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="REGISTRARUSUARIO" />
-
-            <Button
                 android:id="@+id/button9"
                 android:layout_width="match_parent"
                 android:layout_height="58dp"

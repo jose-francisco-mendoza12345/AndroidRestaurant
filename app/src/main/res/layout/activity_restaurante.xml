@@ -156,7 +156,8 @@
                 android:onClick="SubirLogo"
                 android:text="@string/botonFoto"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:text="SUBIR FOTO" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -188,7 +189,8 @@
                 android:onClick="SubirRestaurante"
                 android:text="@string/botonFoto"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:text="SUBIR FOTO" />
 
             <Button
                 android:id="@+id/button"

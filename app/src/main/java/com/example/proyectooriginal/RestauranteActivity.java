@@ -63,8 +63,8 @@ public class RestauranteActivity extends AppCompatActivity {
     {
         Intent otraActividad2=new Intent(this,CrearMenu.class);
         if(!nombre.getText().toString().isEmpty() && !nit.getText().toString().isEmpty() &&
-            !propietario.getText().toString().isEmpty() && !calle.getText().toString().isEmpty() &&
-            !telf.getText().toString().isEmpty() && !lon.getText().toString().isEmpty() &&
+                !propietario.getText().toString().isEmpty() && !calle.getText().toString().isEmpty() &&
+                !telf.getText().toString().isEmpty() && !lon.getText().toString().isEmpty() &&
                 !lat.getText().toString().isEmpty() && !fecha.getText().toString().isEmpty())
         {
             Toast.makeText(this, "Los Datos han sido registrados", Toast.LENGTH_SHORT).show();

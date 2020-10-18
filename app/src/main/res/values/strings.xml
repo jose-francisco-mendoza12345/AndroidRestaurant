@@ -21,7 +21,6 @@
     <string name="txt_fecha">Fecha:</string>
     <string name="txt_Logo">Logo</string>
     <string name="txt_FotoRes">Foto de Restaurante</string>
-    <string name="botonFoto">Agregar o Subir Foto</string>
     <string name="boton3">Guardar Datos</string>
 
     <!-- Tercera Actividad -->
@@ -30,5 +29,15 @@
     <string name="txt_precio">Precio</string>
     <string name="txt_tomarFoto">Tomar Foto</string>
     <string name="ListaAgregar">Agregar</string>
+    <string name="title_activity_registrar_usuario">RegistrarUsuario</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="botonFoto" />
 
 </resources>

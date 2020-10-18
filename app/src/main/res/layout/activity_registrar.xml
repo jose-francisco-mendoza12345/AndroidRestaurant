@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_width="match_parent"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".registrar"
@@ -16,17 +16,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="email"/>
+
+
         <EditText
             android:id="@+id/log_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="pass"/>
+            android:hint="pass" />
+
         <Button
             android:id="@+id/log_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="send_login"/>
-
+            android:text="ENVIAR " />
 
         <EditText
             android:id="@+id/reg_nick"
@@ -34,15 +36,20 @@
             android:layout_height="wrap_content"
             android:hint="nick"/>
         <EditText
-            android:id="@+id/reg_edad"
+            android:id="@+id/reg_ci"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="edad"/>
+            android:hint="ci"/>
         <EditText
-            android:id="@+id/reg_tipo"
+            android:id="@+id/reg_calle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="tipo"/>
+            android:hint="calle"/>
+        <EditText
+            android:id="@+id/reg_telefono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="telefono"/>
         <EditText
             android:id="@+id/reg_email"
             android:layout_width="match_parent"
@@ -53,11 +60,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="password"/>
+
         <Button
             android:id="@+id/reg_send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="send"/>
+            android:text="GUARDAR " />
 
 
     </LinearLayout>
