@@ -10,25 +10,16 @@
         tools:context=".registrar"
         android:gravity="center"
         android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/log_email"
+        <TextView
+            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="email"/>
-
-
-        <EditText
-            android:id="@+id/log_pass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="pass" />
-
-        <Button
-            android:id="@+id/log_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ENVIAR " />
+            android:text="registrar cliente"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textIsSelectable="false"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/reg_nick"
@@ -51,6 +42,11 @@
             android:layout_height="wrap_content"
             android:hint="telefono"/>
         <EditText
+            android:id="@+id/reg_Tipo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="tipo"/>
+        <EditText
             android:id="@+id/reg_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,6 +56,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="password"/>
+        <EditText
+            android:id="@+id/reg_Fecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Fecha"/>
 
         <Button
             android:id="@+id/reg_send"
