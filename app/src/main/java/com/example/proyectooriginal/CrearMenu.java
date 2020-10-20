@@ -60,7 +60,7 @@ public class CrearMenu extends AppCompatActivity {
         if(nombre.getText().toString().length()!=0 && precio.getText().toString().length()!=0)
         {
             ListaMenu.add(nombre.getText().toString()+" "+precio.getText().toString()+"Bs");
-            ListaBorrar.add("registrar");
+            ListaBorrar.add("Borrar");
         }
         else
         {
