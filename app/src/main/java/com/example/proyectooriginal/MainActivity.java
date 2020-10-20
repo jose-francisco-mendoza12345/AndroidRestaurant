@@ -64,7 +64,7 @@ public class MainActivity<LoadCompo> extends AppCompatActivity {
         params.add("email", email.getText().toString());
         params.add("password", password.getText().toString());
 
-        client.post(Endpoints.LOGIN_SERVICE, params, new JsonHttpResponseHandler() {
+        client.get(Endpoints.LOGIN_SERVICE, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
