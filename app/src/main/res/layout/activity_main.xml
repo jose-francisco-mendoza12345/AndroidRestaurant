@@ -158,28 +158,6 @@
                 android:text="Button"
                 android:visibility="invisible" />
 
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="74dp">
-
-                <RadioButton
-                    android:id="@+id/rb_normal"
-                    android:layout_width="229dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:scrollHorizontally="false"
-                    android:text="@string/rb_normal"
-                    android:textSize="18sp" />
-
-                <RadioButton
-                    android:id="@+id/rb_registroRes"
-                    android:layout_width="229dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/rb_CrearRes"
-                    android:textSize="18sp" />
-            </RadioGroup>
-
 
         </LinearLayout>
     </ScrollView>

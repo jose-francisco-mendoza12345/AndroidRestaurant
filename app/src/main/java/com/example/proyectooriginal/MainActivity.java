@@ -23,12 +23,11 @@ import cz.msebera.android.httpclient.Header;
 
 public class MainActivity<LoadCompo> extends AppCompatActivity {
     private EditText email, password;
-    private RadioButton registroNormal, registarRestaurante;
     private MainActivity root = this;
 
     //agregado y borrar
     // private Button btn;
-         private  RadioButton RegistroNormal;
+    private RadioButton RegistroNormal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,22 +37,7 @@ public class MainActivity<LoadCompo> extends AppCompatActivity {
         email = (EditText) findViewById(R.id.email_txt);
         password = (EditText) findViewById(R.id.password_txt);
 
-        registroNormal = (RadioButton) findViewById(R.id.rb_normal);
-        registarRestaurante = (RadioButton) findViewById(R.id.rb_registroRes);
-
-         registroNormal = (RadioButton) findViewById(R.id.rb_normal);
-
-        registroNormal .setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent in=new Intent(MainActivity.this, registrar.class);
-                startActivity(in);
-            }
-        });
-
-
     }
-
 
 
     public void Sesion(View view) {
@@ -102,40 +86,13 @@ public class MainActivity<LoadCompo> extends AppCompatActivity {
                     e.printStackTrace();
 
                 }
-            }});
+            }
+        });
     }
 
 
     public void Registrar(View view) {
-        String Correo = email.getText().toString();
-        String Password = password.getText().toString();
-        Intent otraActividad = new Intent(this, RestauranteActivity.class);
-       /* if (Correo.length() == 0) {
-            Toast.makeText(this, "El Correo es necesario", Toast.LENGTH_SHORT).show();
-        }
-        if (Password.length() == 0) {
-            Toast.makeText(this, "La Contraseña es necesaria", Toast.LENGTH_SHORT).show();
-        }
-
-        */
-
-        //if (Correo.length() != 0 && Password.length() != 0) {
-
-            if (registroNormal.isChecked() == false && registarRestaurante.isChecked() == false) {
-                Toast.makeText(this, "Seleccione una opcion para continuar", Toast.LENGTH_SHORT).show();
-            } else {
-                if (registroNormal.isChecked() == true) {
-                    Toast.makeText(this, "El usuario ha sido Registrado", Toast.LENGTH_SHORT).show();
-
-                } else {
-                    Toast.makeText(this, "Registre los datos de su Restaurante", Toast.LENGTH_SHORT).show();
-                    startActivity(otraActividad);
-                }
-            }
-
-
-        }
-
+        Intent otraActividad = new Intent(this, registrar.class);
+        startActivity(otraActividad);
     }
-
-//}
+}
