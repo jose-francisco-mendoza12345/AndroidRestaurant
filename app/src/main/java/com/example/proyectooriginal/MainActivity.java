@@ -52,42 +52,41 @@ public class MainActivity<LoadCompo> extends AppCompatActivity {
         }
         if (Correo.length() != 0 && Password.length() != 0) {
 
-            Toast.makeText(this, "La Sesion se ha Iniciado", Toast.LENGTH_SHORT).show();
-        }
+            AsyncHttpClient client = new AsyncHttpClient();
+            RequestParams params = new RequestParams();
 
-        AsyncHttpClient client = new AsyncHttpClient();
+            params.add("email", Correo);
+            params.add("password", Password);
 
-        EditText email = root.findViewById(R.id.email_txt);
-        EditText password = root.findViewById(R.id.password_txt);
+            client.post(Endpoints.LOGIN_SERVICE, params, new JsonHttpResponseHandler(){
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    try {
 
-        RequestParams params = new RequestParams();
-        params.add("email", email.getText().toString());
-        params.add("password", password.getText().toString());
+                        if(response.has("msn"))
+                        {
+                            UserDataServe.MSN = response.getString("msn");
+                        }
+                        if(response.has("token"))
+                        {
+                            UserDataServe.TOKEN = response.getString("token");
+                        }
+                        if(UserDataServe.TOKEN.length()>15)
+                        {
+                            Intent intent=new Intent(root, registrar.class);
+                            root.startActivity(intent);
+                        }
+                        else
+                        {
+                            Toast.makeText(root,response.getString("msn"),Toast.LENGTH_SHORT).show();
+                        }
 
-        client.post(Endpoints.LOGIN_SERVICE, params, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
-                    if (response.has("msn")) {
-                        UserDataServe.MSN = response.getString("msn");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                    if (response.has("token")) {
-                        UserDataServe.TOKEN = response.getString("token");
-
-                    }
-                    if (UserDataServe.TOKEN.length() > 150) {
-                        Intent intent = new Intent(root, CrearMenu.class);
-                        root.startActivity(intent);
-                    } else {
-                        Toast.makeText(root, response.getString("msn"), Toast.LENGTH_LONG).show();
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-
                 }
-            }
-        });
+            });
+        }
     }
 
 
