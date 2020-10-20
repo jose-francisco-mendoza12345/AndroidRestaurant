@@ -40,9 +40,9 @@ public class MainActivity<LoadCompo> extends AppCompatActivity {
     }
 
 
-    public void Sesion(View view) {
-        String Correo = email.getText().toString();
-        String Password = password.getText().toString();
+    public void Sesion(final View view) {
+        final String Correo = email.getText().toString();
+        final String Password = password.getText().toString();
 
         if (Correo.length() == 0) {
             Toast.makeText(this, "El Correo es necesario", Toast.LENGTH_SHORT).show();
@@ -52,6 +52,7 @@ public class MainActivity<LoadCompo> extends AppCompatActivity {
         }
         if (Correo.length() != 0 && Password.length() != 0) {
 
+//<<<<<<< HEAD
             Toast.makeText(this, "La Sesion se ha Iniciado", Toast.LENGTH_SHORT).show();
         }
 
@@ -70,25 +71,39 @@ public class MainActivity<LoadCompo> extends AppCompatActivity {
                 try {
                     if (response.has("msn")) {
                         UserDataServe.MSN = response.getString("msn");
-                    }
-                    if (response.has("token")) {
-                        UserDataServe.TOKEN = response.getString("token");
+//=======
+                        AsyncHttpClient client = new AsyncHttpClient();
+                        RequestParams params = new RequestParams();
 
-                    }
-                    if (UserDataServe.TOKEN.length() > 150) {
-                        Intent intent = new Intent(root, CrearMenu.class);
-                        root.startActivity(intent);
-                    } else {
-                        Toast.makeText(root, response.getString("msn"), Toast.LENGTH_LONG).show();
-                    }
+                        params.add("email", Correo);
+                        params.add("password", Password);
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                                client.post(Endpoints.LOGIN_SERVICE, params, new JsonHttpResponseHandler() {
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                try {
 
+                                    if (response.has("msn")) {
+                                        UserDataServe.MSN = response.getString("msn");
+                                    }
+                                    if (response.has("token")) {
+                                        UserDataServe.TOKEN = response.getString("token");
+                                    }
+                                    if (UserDataServe.TOKEN.length() > 15) {
+                                        Intent intent = new Intent(root, registrar.class);
+                                        root.startActivity(intent);
+                                    } else {
+                                        Toast.makeText(root, response.getString("msn"), Toast.LENGTH_SHORT).show();
+                                    }
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+//>>>>>>> a35356abde7e9efbb86387b17fa28ffeb9a09256
+                                }
+                            }
+                        });
+                    }
                 }
-            }
-        });
-    }
 
 
     public void Registrar(View view) {
