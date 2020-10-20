@@ -1,73 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout
+    tools:context=".registrar">
+
+    <Button
+        android:id="@+id/bt_registrar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".registrar"
-        android:gravity="center"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="registrar cliente"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textIsSelectable="false"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:onClick="RegistrarDatos"
+        android:text="@string/botonREg"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
-        <EditText
-            android:id="@+id/reg_nick"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="nick"/>
-        <EditText
-            android:id="@+id/reg_ci"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="ci"/>
-        <EditText
-            android:id="@+id/reg_calle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="calle"/>
-        <EditText
-            android:id="@+id/reg_telefono"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="telefono"/>
-        <EditText
-            android:id="@+id/reg_Tipo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="tipo"/>
-        <EditText
-            android:id="@+id/reg_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="email"/>
-        <EditText
-            android:id="@+id/reg_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="password"/>
-        <EditText
-            android:id="@+id/reg_Fecha"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Fecha"/>
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="349dp"
+        android:layout_height="362dp"
+        app:layout_constraintBottom_toTopOf="@+id/bt_registrar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/reg_send"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="GUARDAR " />
+            android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/titulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/botonREg"
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-    </LinearLayout>
-</ScrollView>
+            <EditText
+                android:id="@+id/txt_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/txt_nombre"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/txt_ci"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/txt_ci"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/txt_calle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/txt_calle"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/txt_telf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/txt_telefono"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/txt_correo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/txt_correo"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/txt_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/txt_contrasenia"
+                android:inputType="textPassword" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/rb_registrar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Rb_res"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </RadioGroup>
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

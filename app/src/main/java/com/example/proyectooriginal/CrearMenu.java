@@ -27,7 +27,7 @@ public class CrearMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_menu);
 
-        nombre=(EditText) findViewById(R.id.txt_nombre);
+        nombre=(EditText) findViewById(R.id.titulo);
         precio=(EditText) findViewById(R.id.txt_precio);
 
         ListaMenu = new ArrayList<>();//creacion del ArrayList<>
@@ -60,7 +60,7 @@ public class CrearMenu extends AppCompatActivity {
         if(nombre.getText().toString().length()!=0 && precio.getText().toString().length()!=0)
         {
             ListaMenu.add(nombre.getText().toString()+" "+precio.getText().toString()+"Bs");
-            ListaBorrar.add("registrar");
+            ListaBorrar.add("Borrar");
         }
         else
         {

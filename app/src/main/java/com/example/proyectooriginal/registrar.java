@@ -5,94 +5,63 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.example.proyectooriginal.utils.Endpoints;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
+public class registrar extends AppCompatActivity {
+    private EditText nombre, ci, calle, telef, correo, password;
+    private RadioButton rb_registrar;
 
-import org.json.JSONObject;
-
-import cz.msebera.android.httpclient.Header;
-
-public class registrar extends AppCompatActivity{
-
-  //  Button btn1;
-    EditText nick,ci,calle,telefono,Tipo,email2,pass2,Fecha;
-    Button btn2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar);
 
+        nombre=(EditText) findViewById(R.id.txt_nombre);
+        ci=(EditText) findViewById(R.id.txt_ci);
+        calle=(EditText) findViewById(R.id.txt_calle);
+        telef=(EditText) findViewById(R.id.txt_telf);
+        correo=(EditText) findViewById(R.id.txt_correo);
+        password=(EditText) findViewById(R.id.txt_password);
 
-
-
-        nick=findViewById(R.id.reg_nick);
-        ci=findViewById(R.id.reg_ci);
-        calle=findViewById(R.id.reg_calle);
-        telefono=findViewById(R.id.reg_telefono);
-        Tipo=findViewById(R.id.reg_Tipo);
-        email2=findViewById(R.id.reg_email);
-        pass2=findViewById(R.id.reg_password);
-        Fecha=findViewById(R.id.reg_Fecha);
-        btn2=findViewById(R.id.reg_send);
-
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent in=new Intent(registrar.this,MainActivity.class);
-                startActivity(in);
-
-            }
-        });
-
+        rb_registrar=(RadioButton) findViewById(R.id.rb_registrar);
     }
 
- /*
-    private void sendLogin(){
-        AsyncHttpClient client=new AsyncHttpClient();
-        RequestParams req=new RequestParams();
-
-        req.put("email",email1.getText().toString());
-        req.put("password",pass1.getText().toString());
-
-        client.post(Endpoints.LOGIN_SERVICE+"/login",req,new JsonHttpResponseHandler(){
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                super.onSuccess(statusCode, headers, response);
-                try {
-                    String msn=response.getString("msn");
-                    Toast.makeText(registrar.this, ""+response.getString("token"), Toast.LENGTH_SHORT).show();
-                }catch (Exception e){}
+    public void RegistrarDatos(View view)
+    {
+        Intent otraActividad = new Intent(this, RestauranteActivity.class);
+        String Nombre=nombre.getText().toString();
+        String Ci=ci.getText().toString();
+        String Calle=calle.getText().toString();
+        String Telf=telef.getText().toString();
+        String tipo="";
+        String Email=correo.getText().toString();
+        String Password=password.getText().toString();
+        if(Nombre.length()==0 || Ci.length()==0 || Telf.length()==0 || Email.length()==0 || Password.length()==0)
+        {
+            Toast.makeText(this, "Debe de llenar todos los Datos", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            if(rb_registrar.isChecked()==false)
+            {
+                tipo="Cliente";
+                Toast.makeText(this, Nombre+" fue Registrado", Toast.LENGTH_SHORT).show();
             }
-        });
-    }
-*/
-    private  void sendRegister(){
-        AsyncHttpClient client=new AsyncHttpClient();
-        RequestParams req=new RequestParams();
-        req.put("nick",nick.getText().toString());
-        req.put("ci",Integer.parseInt(ci.getText().toString()));
-        req.put("calle",calle.getText().toString());
-        req.put("telefono",telefono.getText().toString());
-        req.put("Tipo",Tipo.getText().toString());
-        req.put("email",email2.getText().toString());
-        req.put("password",pass2.getText().toString());
-        req.put("Fecha",Fecha.getText().toString());
-        client.post(Endpoints.LOGIN_SERVICE,req,new JsonHttpResponseHandler(){
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                super.onSuccess(statusCode, headers, response);
-                try {
-                    String msn=response.getString("msn");
-                    Toast.makeText(registrar.this, ""+response.getString("token"), Toast.LENGTH_SHORT).show();
-                }catch (Exception e){}
+            else
+            {
+                tipo="Propietario";
             }
-        });
+        }
 
+        //Codigo para el registro a la base de datos
+        //------------------------
+
+        //------------------------
+        if(tipo.equals("Propietario"))
+        {
+            startActivity(otraActividad);
+        }
     }
 }

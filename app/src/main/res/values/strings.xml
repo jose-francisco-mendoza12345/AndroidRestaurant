@@ -30,6 +30,16 @@
     <string name="txt_tomarFoto">Tomar Foto</string>
     <string name="ListaAgregar">Agregar</string>
     <string name="title_activity_registrar_usuario">RegistrarUsuario</string>
+    <string name="botonFoto">Subir Foto</string>
+
+    <!-- Actividad Registrar-->
+    <string name="botonREg">Registrar</string>
+    <string name="txt_ci">Ci:</string>
+    <string name="Rb_res">Registrar Restaurante</string>
+
+
+
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -38,6 +48,6 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="botonFoto" />
+
 
 </resources>
