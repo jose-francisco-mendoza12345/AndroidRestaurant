@@ -10,15 +10,19 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.proyectooriginal.utils.Endpoints;
+import com.example.proyectooriginal.utils.UserDataServe;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 
 public class registrar extends AppCompatActivity {
+    private registrar root = this;
+
     private EditText nombre, ci, calle, telef, correo, password;
     private RadioButton rb_registrar;
 
@@ -39,15 +43,14 @@ public class registrar extends AppCompatActivity {
 
     public void RegistrarDatos(View view)
     {
-        Intent otraActividad = new Intent(this, RestauranteActivity.class);
-        String Nombre=nombre.getText().toString();
+        final String Nombre=nombre.getText().toString();
         String Ci=ci.getText().toString();
         String Calle=calle.getText().toString();
         String Telf=telef.getText().toString();
         String tipo="";
         String Email=correo.getText().toString();
         String Password=password.getText().toString();
-        if(Nombre.length()==0 || Ci.length()==0 || Telf.length()==0 || Email.length()==0 || Password.length()==0)
+        if(Nombre.length()==0 || Ci.length()==0 || Telf.length()==0 || Email.length()==0)
         {
             Toast.makeText(this, "Debe de llenar todos los Datos", Toast.LENGTH_SHORT).show();
         }
@@ -55,15 +58,15 @@ public class registrar extends AppCompatActivity {
         {
             if(rb_registrar.isChecked()==false)
             {
-                tipo="Cliente";
-                Toast.makeText(this, Nombre+" fue Registrado", Toast.LENGTH_SHORT).show();
+                tipo="cliente";
             }
             else
             {
-                tipo="Propietario";
+                tipo="propietario";
             }
         }
 
+<<<<<<< HEAD
         //Codigo para el registro a la base de datos
         //-----------------------
         AsyncHttpClient client=new AsyncHttpClient();
@@ -75,19 +78,41 @@ public class registrar extends AppCompatActivity {
         req.put("email",correo.getText().toString());
         req.put("password",password.getText().toString());
         client.post(Endpoints.LOGIN_SERVICE,req,new JsonHttpResponseHandler(){
+=======
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+
+        params.add("nombre", Nombre);
+        params.add("ci", Ci);
+        params.add("telefono", Telf);
+        params.add("tipo", tipo);
+        params.add("email", Email);
+        params.add("password", Password);
+
+
+        final String finalTipo = tipo;
+        client.post(Endpoints.USUARIO_SERVICE, params, new JsonHttpResponseHandler() {
+>>>>>>> 673098e4dbaaaf911907998304b007d1cc421d02
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                super.onSuccess(statusCode, headers, response);
                 try {
-                    String msn=response.getString("msn");
-                    Toast.makeText(registrar.this, ""+response.getString("token"), Toast.LENGTH_SHORT).show();
-                }catch (Exception e){}
+                    if (!response.has("msn")) {
+                        if(finalTipo.equals("propietario"))
+                        {
+                            Intent otraActividad=new Intent(root,RestauranteActivity.class);
+                            startActivity(otraActividad);
+                        }
+                        else
+                            Toast.makeText(root, Nombre+" Registrado", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(root, response.getString("msn"), Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
-        //------------------------
-        if(tipo.equals("Propietario"))
-        {
-            startActivity(otraActividad);
-        }
     }
 }
