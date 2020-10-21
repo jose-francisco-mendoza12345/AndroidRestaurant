@@ -9,6 +9,15 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.example.proyectooriginal.utils.Endpoints;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONObject;
+
+import cz.msebera.android.httpclient.Header;
+
 public class registrar extends AppCompatActivity {
     private EditText nombre, ci, calle, telef, correo, password;
     private RadioButton rb_registrar;
@@ -56,8 +65,25 @@ public class registrar extends AppCompatActivity {
         }
 
         //Codigo para el registro a la base de datos
-        //------------------------
-
+        //-----------------------
+        AsyncHttpClient client=new AsyncHttpClient();
+        RequestParams req=new RequestParams();
+        req.put("nombre",ci.getText().toString());
+        req.put("Ci",(ci.getText().toString()));
+        req.put("calle",calle.getText().toString());
+        req.put("telefono",telef.getText().toString());
+        req.put("email",correo.getText().toString());
+        req.put("password",password.getText().toString());
+        client.post(Endpoints.LOGIN_SERVICE,req,new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                try {
+                    String msn=response.getString("msn");
+                    Toast.makeText(registrar.this, ""+response.getString("token"), Toast.LENGTH_SHORT).show();
+                }catch (Exception e){}
+            }
+        });
         //------------------------
         if(tipo.equals("Propietario"))
         {

@@ -13,7 +13,16 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
+  buildscript {
+      repositories{
+          google()
+          jcenter()
+      }
+      dependencies {
+          classpath 'com.android.tools.build:gradle:3.1.1'
+          classpath 'com.google.gms:google-services:3.2.0'
+      }
+  }
     buildTypes {
         release {
             minifyEnabled false
@@ -34,5 +43,4 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.loopj.android:android-async-http:1.4.9'
-    compile 'com.loopj.android:android-async-http:1.4.9'
 }
