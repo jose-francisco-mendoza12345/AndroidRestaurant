@@ -68,7 +68,7 @@ public class registrar extends AppCompatActivity {
         //-----------------------
         AsyncHttpClient client=new AsyncHttpClient();
         RequestParams req=new RequestParams();
-        req.put("nombre",ci.getText().toString());
+        req.put("nombre",nombre.getText().toString());
         req.put("Ci",(ci.getText().toString()));
         req.put("calle",calle.getText().toString());
         req.put("telefono",telef.getText().toString());
