@@ -2,19 +2,31 @@ package com.example.proyectooriginal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.proyectooriginal.utils.Endpoints;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+
+import cz.msebera.android.httpclient.Header;
 
 public class CrearMenu extends AppCompatActivity {
     private EditText nombre,precio;
     private ListView lt_menu,lt_borrar;
+    Button guardar;
 
     ArrayList<String> ListaMenu;
     ArrayAdapter ADP;
@@ -29,6 +41,16 @@ public class CrearMenu extends AppCompatActivity {
 
         nombre=(EditText) findViewById(R.id.titulo);
         precio=(EditText) findViewById(R.id.txt_precio);
+        guardar=findViewById(R.id.guardar);
+
+        guardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in=new Intent(CrearMenu.this,CrearMenu.class);
+                startActivity(in);
+
+            }
+        });
 
         ListaMenu = new ArrayList<>();//creacion del ArrayList<>
         ADP = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,ListaMenu);
@@ -54,9 +76,26 @@ public class CrearMenu extends AppCompatActivity {
             }
         });
     }
+   public void Guardar(View view)
+    {
+
+
+    }
 
     public void Agregar(View view)
     {
+        // creacion del menu con la base de datos
+        AsyncHttpClient client=new AsyncHttpClient();
+        RequestParams req= new RequestParams();
+        req.put("nombre",nombre.getText().toString());
+        req.put("precio",precio.getText().toString());
+        client.get(Endpoints.MENU_SERVICE,req,new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+
+            }
+        });
         if(nombre.getText().toString().length()!=0 && precio.getText().toString().length()!=0)
         {
             ListaMenu.add(nombre.getText().toString()+" "+precio.getText().toString()+"Bs");

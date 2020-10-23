@@ -40,7 +40,6 @@ public class registrar extends AppCompatActivity {
 
         rb_registrar=(RadioButton) findViewById(R.id.rb_registrar);
     }
-
     public void RegistrarDatos(View view)
     {
         final String Nombre=nombre.getText().toString();
@@ -66,19 +65,6 @@ public class registrar extends AppCompatActivity {
             }
         }
 
-<<<<<<< HEAD
-        //Codigo para el registro a la base de datos
-        //-----------------------
-        AsyncHttpClient client=new AsyncHttpClient();
-        RequestParams req=new RequestParams();
-        req.put("nombre",nombre.getText().toString());
-        req.put("Ci",(ci.getText().toString()));
-        req.put("calle",calle.getText().toString());
-        req.put("telefono",telef.getText().toString());
-        req.put("email",correo.getText().toString());
-        req.put("password",password.getText().toString());
-        client.post(Endpoints.LOGIN_SERVICE,req,new JsonHttpResponseHandler(){
-=======
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
 
@@ -92,7 +78,6 @@ public class registrar extends AppCompatActivity {
 
         final String finalTipo = tipo;
         client.post(Endpoints.USUARIO_SERVICE, params, new JsonHttpResponseHandler() {
->>>>>>> 673098e4dbaaaf911907998304b007d1cc421d02
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
