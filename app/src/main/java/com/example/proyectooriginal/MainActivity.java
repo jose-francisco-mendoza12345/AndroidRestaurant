@@ -74,8 +74,10 @@ public class MainActivity<LoadCompo> extends AppCompatActivity {
                         }
                         if(UserDataServe.TOKEN.length()>15)
                         {
-                            Intent intent=new Intent(root, registrar.class);
-                            root.startActivity(intent);
+                            /*Intent intent=new Intent(root, registrar.class);
+                            root.startActivity(intent);*/
+                            Toast.makeText(root,"El usuario ha sido iniciado Sesion",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(root,response.getString("token"),Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
@@ -92,7 +94,7 @@ public class MainActivity<LoadCompo> extends AppCompatActivity {
 
 
     public void Registrar(View view) {
-        Intent otraActividad = new Intent(this, RestauranteActivity.class);
+        Intent otraActividad = new Intent(this, registrar.class);
         startActivity(otraActividad);
     }
 }
