@@ -92,7 +92,7 @@ public class MainActivity<LoadCompo> extends AppCompatActivity {
 
 
     public void Registrar(View view) {
-        Intent otraActividad = new Intent(this, registrar.class);
+        Intent otraActividad = new Intent(this, RestauranteActivity.class);
         startActivity(otraActividad);
     }
 }

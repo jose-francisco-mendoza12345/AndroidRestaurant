@@ -13,10 +13,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.proyectooriginal.utils.Endpoints;
+import com.example.proyectooriginal.utils.UserDataServe;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -24,15 +26,19 @@ import java.util.ArrayList;
 import cz.msebera.android.httpclient.Header;
 
 public class CrearMenu extends AppCompatActivity {
+    private CrearMenu root = this;
+
     private EditText nombre,precio;
     private ListView lt_menu,lt_borrar;
-    Button guardar;
+    private String Recibido;
 
     ArrayList<String> ListaMenu;
     ArrayAdapter ADP;
 
     ArrayList<String> ListaBorrar;
     ArrayAdapter ADP2;
+
+    ArrayList<String> DatosBD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,27 +47,20 @@ public class CrearMenu extends AppCompatActivity {
 
         nombre=(EditText) findViewById(R.id.titulo);
         precio=(EditText) findViewById(R.id.txt_precio);
-        guardar=findViewById(R.id.guardar);
+        Recibido=getIntent().getStringExtra("ID");
 
-        guardar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent in=new Intent(CrearMenu.this,CrearMenu.class);
-                startActivity(in);
-
-            }
-        });
+        DatosBD =new ArrayList<String>();
 
         ListaMenu = new ArrayList<>();//creacion del ArrayList<>
         ADP = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,ListaMenu);
         lt_menu=(ListView) findViewById(R.id.lista_menu);
         lt_menu.setAdapter(ADP);
 
+
         ListaBorrar = new ArrayList<>();//Creacion del ArratList<>
         ADP2 = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,ListaBorrar);
         lt_borrar=(ListView) findViewById(R.id.lista_borrar);
         lt_borrar.setAdapter(ADP2);
-
 
 
         lt_borrar.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -73,33 +72,22 @@ public class CrearMenu extends AppCompatActivity {
                 ListaBorrar.remove(i);
                 ADP.notifyDataSetChanged();
                 ADP2.notifyDataSetChanged();
+
+                DatosBD.remove(i);
             }
         });
-    }
-   public void Guardar(View view)
-    {
-
-
     }
 
     public void Agregar(View view)
     {
-        // creacion del menu con la base de datos
-        AsyncHttpClient client=new AsyncHttpClient();
-        RequestParams req= new RequestParams();
-        req.put("nombre",nombre.getText().toString());
-        req.put("precio",precio.getText().toString());
-        client.get(Endpoints.MENU_SERVICE,req,new JsonHttpResponseHandler(){
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                super.onSuccess(statusCode, headers, response);
 
-            }
-        });
         if(nombre.getText().toString().length()!=0 && precio.getText().toString().length()!=0)
         {
-            ListaMenu.add(nombre.getText().toString()+" "+precio.getText().toString()+"Bs");
+            ListaMenu.add(nombre.getText().toString()+" "+precio.getText().toString()+" Bs");
             ListaBorrar.add("Borrar");
+
+            DatosBD.add(nombre.getText().toString());
+            DatosBD.add(precio.getText().toString());
         }
         else
         {
@@ -110,5 +98,50 @@ public class CrearMenu extends AppCompatActivity {
 
         nombre.setText("");
         precio.setText("");
+    }
+
+    public void Guardar(View view)
+    {
+        final Boolean[] resultado = {false};
+        final int[] aux = {0};
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        for(int i=0;i<DatosBD.size();i=i+2)
+        {
+            Toast.makeText(root, String.valueOf(i), Toast.LENGTH_LONG).show();
+            params.add("nombre",DatosBD.get(i));
+            params.add("precio",DatosBD.get(i+1));
+            params.add("restaurant",Recibido);
+            client.post(Endpoints.MENU_SERVICE, params, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    try {
+
+                        if(response.has("msn"))
+                        {
+                            UserDataServe.MSN = response.getString("msn");
+                        }
+                        if(UserDataServe.MSN.equals("Menu Registrado"))
+                        {
+                            resultado[0] =true;
+                        }
+                        else
+                        {
+                            resultado[0] =false;
+                            aux[0]=aux[0]+1;
+                        }
+
+                    }catch(JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            if(!resultado[0])
+                break;
+        }
+        if(aux[0]==0)
+            Toast.makeText(root, "El menu ha sido registrado con exito", Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(root, "Ha ocurrido algunos Errores durante el registro", Toast.LENGTH_LONG).show();
     }
 }

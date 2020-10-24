@@ -54,7 +54,7 @@
                 android:layout_marginTop="4dp"
                 android:ems="10"
                 android:hint="@string/txt_Nit"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:textColorHint="#000000"
                 app:layout_constraintTop_toBottomOf="@+id/TextoNombre"
                 tools:layout_editor_absoluteX="13dp" />
@@ -90,7 +90,7 @@
                 android:layout_marginTop="8dp"
                 android:ems="10"
                 android:hint="@string/txt_telefono"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:textColorHint="#000000"
                 app:layout_constraintTop_toBottomOf="@+id/TextoCalle"
                 tools:layout_editor_absoluteX="14dp" />
@@ -102,7 +102,7 @@
                 android:layout_marginTop="8dp"
                 android:ems="10"
                 android:hint="@string/txt_longitud"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:textColorHint="#000000"
                 app:layout_constraintTop_toBottomOf="@+id/TextoTelf"
                 tools:layout_editor_absoluteX="13dp" />
@@ -114,22 +114,10 @@
                 android:layout_marginTop="8dp"
                 android:ems="10"
                 android:hint="@string/txt_latitud"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:textColorHint="#000000"
                 app:layout_constraintTop_toBottomOf="@+id/TextoTelf"
                 tools:layout_editor_absoluteX="13dp" />
-
-            <EditText
-                android:id="@+id/TextFecha"
-                android:layout_width="match_parent"
-                android:layout_height="42dp"
-                android:layout_marginTop="8dp"
-                android:ems="10"
-                android:hint="@string/txt_fecha"
-                android:inputType="datetime"
-                android:textColorHint="#000000"
-                app:layout_constraintTop_toBottomOf="@+id/TextoLog"
-                tools:layout_editor_absoluteX="14dp" />
 
             <TextView
                 android:id="@+id/textView"
@@ -139,7 +127,6 @@
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textStyle="bold" />
-
 
             <ImageView
                 android:id="@+id/FotoLogo"
