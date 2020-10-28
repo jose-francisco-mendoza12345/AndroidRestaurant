@@ -1,8 +1,14 @@
 package com.example.proyectooriginal;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,10 +30,8 @@ import cz.msebera.android.httpclient.Header;
 public class MainActivity<LoadCompo> extends AppCompatActivity {
     private EditText email, password;
     private MainActivity root = this;
-
-    //agregado y borrar
-    // private Button btn;
     private RadioButton RegistroNormal;
+    private  final int CODE_PERMISSIONS = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,22 @@ public class MainActivity<LoadCompo> extends AppCompatActivity {
         email = (EditText) findViewById(R.id.email_txt);
         password = (EditText) findViewById(R.id.password_txt);
 
+        solicitarPermiso();
+    }
+
+    private void solicitarPermiso() {
+        int Internet= ActivityCompat.checkSelfPermission(MainActivity.this,Manifest.permission.INTERNET);
+        int Lectura= ActivityCompat.checkSelfPermission(MainActivity.this,Manifest.permission.READ_EXTERNAL_STORAGE);
+        int EScritura= ActivityCompat.checkSelfPermission(MainActivity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if(Internet!=PackageManager.PERMISSION_GRANTED || Lectura!=PackageManager.PERMISSION_GRANTED || EScritura!=PackageManager.PERMISSION_GRANTED)
+        {
+            if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M)
+            {
+                requestPermissions(new String[]{Manifest.permission.INTERNET,
+                                                Manifest.permission.READ_EXTERNAL_STORAGE,
+                                                Manifest.permission.WRITE_EXTERNAL_STORAGE}, CODE_PERMISSIONS);
+            }
+        }
     }
 
 
@@ -97,4 +117,6 @@ public class MainActivity<LoadCompo> extends AppCompatActivity {
         Intent otraActividad = new Intent(this, registrar.class);
         startActivity(otraActividad);
     }
+
+
 }

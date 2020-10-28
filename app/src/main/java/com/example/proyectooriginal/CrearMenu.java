@@ -102,46 +102,48 @@ public class CrearMenu extends AppCompatActivity {
 
     public void Guardar(View view)
     {
-        final Boolean[] resultado = {false};
-        final int[] aux = {0};
-        AsyncHttpClient client = new AsyncHttpClient();
-        RequestParams params = new RequestParams();
+        String nombre="";
+        String precio="";
+        String id="";
         for(int i=0;i<DatosBD.size();i=i+2)
         {
             Toast.makeText(root, String.valueOf(i), Toast.LENGTH_LONG).show();
-            params.add("nombre",DatosBD.get(i));
-            params.add("precio",DatosBD.get(i+1));
-            params.add("restaurant",Recibido);
-            client.post(Endpoints.MENU_SERVICE, params, new JsonHttpResponseHandler() {
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                    try {
-
-                        if(response.has("msn"))
-                        {
-                            UserDataServe.MSN = response.getString("msn");
-                        }
-                        if(UserDataServe.MSN.equals("Menu Registrado"))
-                        {
-                            resultado[0] =true;
-                        }
-                        else
-                        {
-                            resultado[0] =false;
-                            aux[0]=aux[0]+1;
-                        }
-
-                    }catch(JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-            if(!resultado[0])
-                break;
+            nombre=DatosBD.get(i);
+            precio=DatosBD.get(i+1);
+            id=Recibido;
+            Registro(nombre,precio,id);
         }
-        if(aux[0]==0)
-            Toast.makeText(root, "El menu ha sido registrado con exito", Toast.LENGTH_LONG).show();
-        else
-            Toast.makeText(root, "Ha ocurrido algunos Errores durante el registro", Toast.LENGTH_LONG).show();
+        Toast.makeText(root, "El menu ha sido registrado con exito", Toast.LENGTH_LONG).show();
+    }
+
+    public void Registro(String A, String B, String C)
+    {
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        params.add("nombre",A);
+        params.add("precio",B);
+        params.add("restaurant",C);
+        client.post(Endpoints.MENU_SERVICE, params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    if(response.has("msn"))
+                    {
+                        UserDataServe.MSN = response.getString("msn");
+                    }
+                    if(UserDataServe.MSN.equals("Menu Registrado"))
+                    {
+                        Toast.makeText(root, response.getString("msn"), Toast.LENGTH_LONG).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(root, "Error al momento de Registrar", Toast.LENGTH_LONG).show();
+                    }
+                }catch(JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        //Toast.makeText(root, "Registrado", Toast.LENGTH_LONG).show();
     }
 }

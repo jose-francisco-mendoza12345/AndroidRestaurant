@@ -3,7 +3,9 @@ package com.example.proyectooriginal;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -42,6 +44,8 @@ public class RestauranteActivity extends AppCompatActivity {
     private int control1=0, control2=0;
     private String control="";
     private Uri imagen1, imagen2;
+    String almacen;
+    String almacen2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,11 +92,29 @@ public class RestauranteActivity extends AppCompatActivity {
             AUX.setImageURI(path);
 
             if(control.equals("logo"))
+            {
                 imagen1=path;
+                almacen=getRealPath(root, path);
+            }
             else
+            {
                 imagen2=path;
+                almacen2=getRealPath(root, path);
+            }
             Toast.makeText(this, "Imagen Insertada Correctamente", Toast.LENGTH_SHORT).show();
         }
+    }
+    String getRealPath(Context ctx, Uri path){
+        String uri=null;
+        Cursor cursor = ctx.getContentResolver().query(path,null,null,null,null);
+        if(cursor!=null)
+        {
+            cursor.moveToFirst();
+            int i=cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            uri=cursor.getString(i);
+            cursor.close();
+        }
+        return uri;
     }
 
 
@@ -109,6 +131,9 @@ public class RestauranteActivity extends AppCompatActivity {
                 final AsyncHttpClient client = new AsyncHttpClient();
                 final RequestParams params = new RequestParams();
 
+                File archivo=new File(almacen);
+                File archivo2=new File(almacen2);
+
                 params.add("nombre", nombre.getText().toString());
                 params.add("nit", nit.getText().toString());
                 params.add("propietario", propietario.getText().toString());
@@ -116,8 +141,8 @@ public class RestauranteActivity extends AppCompatActivity {
                 params.add("telefono", telf.getText().toString());
                 params.add("lat", lat.getText().toString());
                 params.add("lng", lon.getText().toString());
-                params.put("imagen", imagen1);
-                params.put("FotoLugar", imagen2);
+                params.put("logo", archivo);
+                params.put("fotoLugar", archivo2);
 
                 client.post(Endpoints.RESTAURANTE_SERVICE, params, new JsonHttpResponseHandler() {
                     @Override
@@ -158,8 +183,6 @@ public class RestauranteActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-
             }
             else
                 Toast.makeText(this, "Debe de insertar las imagenes", Toast.LENGTH_SHORT).show();
