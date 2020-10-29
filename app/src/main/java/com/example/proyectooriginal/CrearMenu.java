@@ -107,13 +107,12 @@ public class CrearMenu extends AppCompatActivity {
         String id="";
         for(int i=0;i<DatosBD.size();i=i+2)
         {
-            Toast.makeText(root, String.valueOf(i), Toast.LENGTH_LONG).show();
             nombre=DatosBD.get(i);
             precio=DatosBD.get(i+1);
             id=Recibido;
             Registro(nombre,precio,id);
         }
-        Toast.makeText(root, "El menu ha sido registrado con exito", Toast.LENGTH_LONG).show();
+        finishAffinity();
     }
 
     public void Registro(String A, String B, String C)

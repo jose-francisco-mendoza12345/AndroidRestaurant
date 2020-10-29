@@ -37,8 +37,12 @@
     <string name="txt_ci">Ci:</string>
     <string name="Rb_res">Registrar Restaurante</string>
 
+    <!-- Actividad Sesion Restauraurante-->
+    <string name="tirulo_4">Selecciona un lugar</string>
 
-
+    <!-- Actividad Sesion Restauraurante-->
+    <string name="tirulo_5">Hacer Pedido</string>
+    <string name="butonOrden">Guardar y Enviar Pedido</string>
 
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

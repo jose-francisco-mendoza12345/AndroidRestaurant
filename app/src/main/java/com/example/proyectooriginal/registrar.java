@@ -88,7 +88,10 @@ public class registrar extends AppCompatActivity {
                             startActivity(otraActividad);
                         }
                         else
+                        {
                             Toast.makeText(root, Nombre+" Registrado", Toast.LENGTH_SHORT).show();
+                            finishAffinity();
+                        }
                     }
                     else {
                         Toast.makeText(root, response.getString("msn"), Toast.LENGTH_SHORT).show();

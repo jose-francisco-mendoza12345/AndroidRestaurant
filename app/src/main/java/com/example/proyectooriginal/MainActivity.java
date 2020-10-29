@@ -22,6 +22,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -61,7 +62,7 @@ public class MainActivity<LoadCompo> extends AppCompatActivity {
 
 
     public void Sesion(View view) {
-        String Correo = email.getText().toString();
+        final String Correo = email.getText().toString();
         String Password = password.getText().toString();
 
         if (Correo.length() == 0) {
@@ -72,9 +73,8 @@ public class MainActivity<LoadCompo> extends AppCompatActivity {
         }
         if (Correo.length() != 0 && Password.length() != 0) {
 
-            AsyncHttpClient client = new AsyncHttpClient();
-            RequestParams params = new RequestParams();
-
+            final AsyncHttpClient client = new AsyncHttpClient();
+            final RequestParams params = new RequestParams();
 
             params.add("email", Correo);
             params.add("password", Password);
@@ -94,8 +94,34 @@ public class MainActivity<LoadCompo> extends AppCompatActivity {
                         }
                         if(UserDataServe.TOKEN.length()>15)
                         {
-                            /*Intent intent=new Intent(root, registrar.class);
-                            root.startActivity(intent);*/
+                            final Intent intent=new Intent(root, SesionRestaurant.class);
+
+                            client.get(Endpoints.USUARIO_SERVICE,params, new JsonHttpResponseHandler() {
+                                public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                                    try {
+                                        String id_Cliente = "";
+                                        for(int i=0;i<response.length();i++)
+                                        {
+                                            JSONObject jresponse = response.getJSONObject(i);
+                                            if(Correo.equals(jresponse.getString("email")))
+                                            {
+                                                id_Cliente=jresponse.getString("_id");
+                                            }
+                                        }
+                                        intent.putExtra("ID_Cliente",id_Cliente);
+                                        startActivity(intent);
+
+                                    }catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                                    Toast.makeText(root, "Error Al consultar a la Base de Datos", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+
+                            root.startActivity(intent);
                             Toast.makeText(root,"El usuario ha sido iniciado Sesion",Toast.LENGTH_SHORT).show();
                             Toast.makeText(root,response.getString("token"),Toast.LENGTH_SHORT).show();
                         }
@@ -111,7 +137,6 @@ public class MainActivity<LoadCompo> extends AppCompatActivity {
             });
         }
     }
-
 
     public void Registrar(View view) {
         Intent otraActividad = new Intent(this, registrar.class);
